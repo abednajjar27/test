@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'config.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await ConfigReader.initialize();
+
   runApp(const MyApp());
 }
 
@@ -65,6 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -98,8 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              ' You have pushed the button this many times:',
+            Text(
+              ' ${ConfigReader.getEnv()}You have pushed the button this many times:',
             ),
             Text(
               '$_counter',
